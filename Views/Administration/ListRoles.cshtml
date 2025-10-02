@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewBag.Title = "All Roles";
+}
+
+<h1>All Roles</h1>
+
+@if(Model.Any())
+{
+    <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Role Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>@item.Name</td>
+                        
+                        <td>
+                           <a class="btn btn-primary btn-sm" asp-controller="Administration" asp-action="EditRole" asp-route-id="@item.Id" 
+                    asp-route-id="@item.Id">Edit</a>
+
+                    <a class="btn btn-danger btn-sm" asp-controller="Administration" asp-action="Delete" 
+                    asp-route-id="@item.Id" onclick="return confirm('Are You Sure?')">Delete</a> 
+                        </td>
+                    </tr>
+                }
+            </tbody>
+           
+        </table>
+
+        <div class="text-end">
+            <a class="btn btn-success" asp-controller="Administration" asp-action="CreateRoles">Add Roles</a>
+        </div>
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Index", "Administration")" class="btn btn-primary">Back</a>
+        </div>
+}
+else
+{
+    <div class="alert alert-info">You have no roles.</div>
+
+    <a class="btn-primary btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">
+        Create Role
+    </a>
+
+   
+}

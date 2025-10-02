@@ -1,0 +1,35 @@
+﻿@model Product
+
+<h2>Delete Product</h2>
+
+<div>
+    <h4>@Model.ProductName</h4>
+    <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+    <p><strong>Quantity:</strong> @Model.Quantity</p>
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="~/Products/@Model.ImageUrl" width="150" />
+    }
+
+    <p><strong>Categories:</strong></p>
+    <ul>
+        @foreach (var cat in Model.ProductCategories)
+        {
+            <li>@cat.Category.CategoryName</li>
+        }
+    </ul>
+
+    <p><strong>Types:</strong></p>
+    <ul>
+        @foreach (var type in Model.ProductTypes)
+        {
+            <li>@type.PetType.Name</li>
+        }
+    </ul>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,86 @@
+﻿@model Ecommerce_Pet_Store.Models.ProductDto
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Add New Product</h2>
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Quantity" class="form-label"></label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="AvailableCategories" class="form-label"></label>
+                        <select asp-for="SelectedCategoryIds" class="form-control" multiple>
+                            <option value = "">-- Select Categories --</option>
+                                @foreach (var cat in Model.AvailableCategories)
+                               {
+                                    <option value="@cat.Id">@cat.CategoryName</option>
+                               }
+                        </select>
+                        <span asp-validation-for="SelectedCategoryIds" class="text-danger"></span>
+                    </div>
+
+                     <div class="mb-3">
+                        <label asp-for="AvailableTypes" class="form-label"></label>
+                        <select asp-for="SelectedTypeIds" class="form-control" multiple>
+                            <option value = "">-- Select Types --</option>
+                                @foreach (var type in Model.AvailableTypes)
+                               {
+                                    <option value="@type.Id">@type.Name</option>
+                               }
+                        </select>
+                        <span asp-validation-for="SelectedTypeIds" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="custom-file">
+                            <input asp-for="ImageFile" type="file" class="custom-file-input" />
+                            <label class="custom-file-label">Choose File...</label>
+                        </div>
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+ <a asp-action="Index" class="btn btn-secondary ml-2">Back to List</a>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Show selected file name
+        document.querySelector('.custom-file-input')?.addEventListener('change', function (e) {
+            var fileName = e.target.files[0]?.name;
+            var label = e.target.nextElementSibling;
+            if (fileName) label.innerText = fileName;
+        });
+    </script>
+}

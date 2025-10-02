@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img style="height:300px;width:100%" src="~/Image/pets-banner.jpg" class="d-block w-100" alt="First Slide">
+    </div>
+    <div class="carousel-item">
+      <img style="height:300px;width:100%" src="~/Image/banner.jpg" class="d-block w-100" alt="Second Slide">
+    </div>
+    <div class="carousel-item">
+      <img  style="height:300px;width:100%" src="~/Image/pet accessories banner.jpg" class="d-block w-100" alt="Third Slide">
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+
+<section class="container my-5">
+    <h2 class="text-center mb-4">Our Pets</h2>
+    <div class="row justify-content-center">
+
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center mb-4">
+            <a asp-controller="Product" asp-action="ByCategory" asp-route-id="1">
+            <img src="/Image/cat categoryjpg.jpg" class="img-fluid rounded-circle mb-2" alt="Product 1" style="width:150px; height:150px; object-fit:cover;">
+            </a>
+            <p>Cat</p>
+        </div>
+
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center mb-4">
+            <a asp-controller="Product" asp-action="ByCategory" asp-route-id="2">
+            <img src="/Image/dog.jpg" class="img-fluid rounded-circle mb-2" alt="Product 2" style="width:150px; height:150px; object-fit:cover;">
+            </a>
+            <p>Dog</p>
+        </div>
+
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center mb-4">
+            <a asp-controller="Product" asp-action="ByCategory" asp-route-id="3">
+            <img src="/Image/bird category.jpg" class="img-fluid rounded-circle mb-2" alt="Product 3" style="width:150px; height:150px; object-fit:cover;">
+            </a>
+            <p>Bird</p>
+        </div>
+
+    </div>
+</section>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Food</h2>
+    <div class="row">
+        <!-- Cat Food -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/Cat food Poster.jpg" class="card-img-top" alt="Cat Food">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cat Food</h5>
+                    <p class="card-text">Healthy and delicious meals for your cats.</p>
+                    <a href="/Product/ByCategory/1?subcategory=Food" class="btn btn-primary">Shop Cat Food</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dog Food -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/dog food poster.jpg" class="card-img-top" alt="Dog Food">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dog Food</h5>
+                    <p class="card-text">Nutritious and tasty meals for your dogs.</p>
+                    <a href="/Product/ByCategory/2?subcategory=Food" class="btn btn-primary">Shop Dog Food</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bird Food -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/bird food poster.jpg" class="card-img-top" alt="Bird Food">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bird Food</h5>
+                    <p class="card-text">Wholesome nutrition for your feathered friends.</p>
+                    <a href="/Product/ByCategory/3?subcategory=Food" class="btn btn-primary">Shop Bird Food</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Toys</h2>
+    <div class="row">
+        <!-- Cat Toys -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/Cat Toy Posterjpg.jpg" class="card-img-top" alt="Cat Toy">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cat Toy</h5>
+                    <p class="card-text">Fun and interactive toys to keep your cats active.</p>
+                    <a href="/Product/ByCategory/1?subcategory=Toy" class="btn btn-primary">Shop Cat Food</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dog Toy -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/Dog Toy Poster.jpg" class="card-img-top" alt="Dog Toy">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dog Toy</h5>
+                    <p class="card-text">Durable and fun toys to keep your dogs happy.</p>
+                    <a href="/Product/ByCategory/2?subcategory=Toy" class="btn btn-primary">Shop Dog Toy</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bird Toy -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/DIY-Parrot-Toy.png" class="card-img-top" alt="Bird Toy">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bird Toy</h5>
+                    <p class="card-text">Engaging toys for your feathered friends.</p>
+                    <a href="/Product/ByCategory/3?subcategory=Toy" class="btn btn-primary">Shop Bird Toy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Accessories</h2>
+    <div class="row">
+        <!-- Cat Accessories -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/Cat Accesories poster_.jpg" class="card-img-top" alt="Cat Food">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cat Accessories</h5>
+                    <p class="card-text">Comfortable and stylish accessories for cats.</p>
+                    <a href="/Product/ByCategory/1?subcategory=Accessories" class="btn btn-primary">Shop Cat Accessories</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dog Accessories -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/Dog Accessories Poster.jpg" class="card-img-top" alt="Dog Accessories">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dog Food</h5>
+                    <p class="card-text">Essential gear and accessories for your dogs.</p>
+                    <a href="/Product/ByCategory/2?subcategory=Accessories" class="btn btn-primary">Shop Dog Accessories</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bird Food -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="~/Image/bird-Accessories Poster.jpg" class="card-img-top" alt="Bird Accessories">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bird Accessories</h5>
+                    <p class="card-text">Comfortable cages, perches, and more for birds.</p>
+                    <a href="/Product/ByCategory/3?subcategory=Accessories" class="btn btn-primary">Shop Bird Accessories</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS CDN (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

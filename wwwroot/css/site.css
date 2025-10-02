@@ -1,0 +1,98 @@
+﻿/* ✅ Mobile styles */
+@media (max-width: 992px) {
+    /* Only center login/register form pages */
+    body.form-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgb(178, 0, 255);
+    }
+
+    .search-box {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+    .search-box {
+        width: 100%;
+        margin-top: 10px;
+    }
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+
+social-icon {
+    color: white; /* default color */
+    font-size: 1.8rem; /* bigger size */
+    transition: color 0.3s; /* smooth hover */
+    text-decoration: none; /* remove underline */
+}
+
+    .social-icon:hover {
+        color: #ff4081; /* pink highlight on hover (Instagram-style) */
+    }
+    /*Admin Menu*/
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #343a40;
+    padding-top: 1rem;
+    position: fixed;
+    width: 250px;
+}
+
+    .sidebar a {
+        color: #adb5bd;
+        padding: 12px;
+        text-decoration: none;
+        display: block;
+        font-size: 1.05rem;
+    }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #495057;
+            color: #fff;
+        }
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+

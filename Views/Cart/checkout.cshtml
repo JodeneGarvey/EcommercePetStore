@@ -1,0 +1,71 @@
+﻿@model EcommercePetStore.ViewModels.CheckoutViewModel
+
+<h2>Checkout</h2>
+<form asp-action="Checkout" method="post">
+    <div class="mb-3">
+        <label asp-for="CustomerName" class="form-label"></label>
+        <input asp-for="CustomerName" class="form-control" />
+        <span asp-validation-for="CustomerName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="mb-3">
+        <label class="form-label">Payment Method</label>
+        <select asp-for="PaymentMethod" class="form-select" id="paymentMethod">
+            <option value="">-- Select Payment Method --</option>
+            <option value="Cash">Cash</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <!-- Card Fields (hidden by default) -->
+    <div id="cardFields" style="display:none;">
+        <div class="mb-3">
+            <label asp-for="CardNumber" class="form-label">Card Number</label>
+            <input asp-for="CardNumber" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ExpiryDate" class="form-label">Expiry Date</label>
+            <input asp-for="ExpiryDate" class="form-control" placeholder="MM/YY" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CVV" class="form-label">CVV</label>
+            <input asp-for="CVV" class="form-control" type="password" maxlength="4" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Place Order</button>
+</form>
+
+
+ @section Scripts {
+    <script>
+        document.getElementById("paymentMethod").addEventListener("change", function () {
+            var method = this.value;
+            var cardFields = document.getElementById("cardFields");
+
+            if (method === "Credit Card" || method === "Debit Card") {
+                cardFields.style.display = "block";
+            } else {
+                cardFields.style.display = "none";
+            }
+        });
+    </script>
+ }

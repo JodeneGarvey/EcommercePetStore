@@ -1,0 +1,87 @@
+﻿@model List<Product>
+@{
+    Layout = "_Layout";
+}
+
+
+<h2 class="text-center mb-5">List of Products</h2>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" asp-action="Index" asp-controller="Administration">
+            <i class="fa-solid fa-store"></i> Admin Panel
+        </a>
+
+        <!-- Hamburger button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Create">
+                        <i class="fa-solid fa-plus"></i> Add Product
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Category" asp-action="Create">
+                        <i class="fa-solid fa-layer-group"></i> Add Category
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="PetType" asp-action="Create">
+                        <i class="fa-solid fa-tags"></i> Add Type
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Available Quantity</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var product in Model)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td><img src="/Products/@product.ImageUrl" width="100" /></td>
+                <td>$@(product.Price)</td>
+                <td>@product.Quantity</td>
+                <td >
+                    @foreach (var cat in product.ProductCategories)
+                    {
+                        <span class="badge bg-info">@cat.Category.CategoryName</span>
+                    }
+                </td>
+                <td>
+                    @foreach (var type in product.ProductTypes)
+                    {
+                        <span class="badge bg-secondary">@type.PetType.Name</span>
+                    }
+                </td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="Product" asp-action="Edit" 
+                    asp-route-id="@product.Id">Edit</a>
+
+                    <a class="btn btn-danger btn-sm" asp-controller="Product" asp-action="Delete" 
+                    asp-route-id="@product.Id" onclick="return confirm('Are You Sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

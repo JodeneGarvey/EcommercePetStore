@@ -1,0 +1,43 @@
+﻿@model Ecommerce_Pet_Store.Models.Category
+
+
+@{
+    ViewData["Title"] = "Edit";
+    Category category = TempData["tempcat"] as Category;
+}
+
+<h1 style="text-align:center">UPDATE Category</h1>
+<hr />
+<div class="container">
+    <div class="card" style="background-color:lavender">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group row">
+                            <label asp-for="CategoryName" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="Enter Category" asp-for="CategoryName" value="" class="form-control" />
+                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" value="Update" class="btn btn-primary" />
+                        </div>
+
+                        
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

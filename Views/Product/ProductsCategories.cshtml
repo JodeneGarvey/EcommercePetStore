@@ -1,0 +1,44 @@
+﻿@model List<Category>
+
+@{
+    ViewData["Title"] = "Product Categories";
+    Layout = "_Layout";
+}
+
+@foreach (var category in Model)
+{
+    <div class="mb-5">
+        <h2 class="mb-3">@category.CategoryName Category</h2>
+
+        <div class="row">
+            @foreach (var pc in category.ProductCategories)
+            {
+                var product = pc.Product;
+
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top"
+                             src="~/Products/@product.ImageUrl"
+                             asp-append-version="true"
+                             alt="@product.ProductName"
+                             style="height: 200px; object-fit: cover;" />
+
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Price:</strong> $@product.Price</p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <a asp-controller="Product"
+                               asp-action="ProductDetails"
+                               asp-route-id="@product.Id"
+                               class="btn btn-primary w-100">
+                                View Product
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

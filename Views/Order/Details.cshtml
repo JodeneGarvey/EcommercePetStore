@@ -1,0 +1,44 @@
+﻿@model EcommercePetStore.Models.Order
+
+<h2>Order Details - #@Model.Id</h2>
+<p><strong>User:</strong> @Model.UserId</p>
+<p><strong>Date:</strong> @Model.OrderDate</p>
+<p><strong>Status:</strong> @Model.Status</p>
+
+<h4>Items</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product?.ProductName</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.Quantity</td>
+                <td>$@(item.Price * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="UpdateStatus" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label>Status</label>
+        <select name="status" class="form-control">
+            <option value="Pending" selected="@("Pending" == Model.Status)">Pending</option>
+            <option value="Processing" selected="@("Processing" == Model.Status)">Processing</option>
+            <option value="Shipped" selected="@("Shipped" == Model.Status)">Shipped</option>
+            <option value="Delivered" selected="@("Delivered" == Model.Status)">Delivered</option>
+            <option value="Cancelled" selected="@("Cancelled" == Model.Status)">Cancelled</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Update</button>
+</form>

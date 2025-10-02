@@ -1,0 +1,49 @@
+﻿@model EcommercePetStore.ViewModels.EditRoleViewModel
+
+@{
+    ViewBag.Title = "Edit Role";
+}
+
+<div class="container mt-4">
+    <h2>Edit Role</h2>
+
+    <form asp-action="EditRole" method="post">
+        
+        <input type="hidden" asp-for="Id" class="form-control" />
+
+        <div class="form-group mb-3">
+            <label asp-for="RoleName" class="form-label"></label>
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="ListRoles" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <hr />
+
+    <h4>Users in this role</h4>
+    @if (Model.Users != null && Model.Users.Count > 0)
+    {
+        <ul class="list-group mt-3">
+            @foreach (var user in Model.Users)
+            {
+                <li class="list-group-item">@user</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-muted">No users are assigned to this role.</p>
+    }
+</div>
+
+<div>
+    <a asp-action="EditUserInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-secondary" style="width:auto">Add or Remove Users</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

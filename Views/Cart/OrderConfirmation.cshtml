@@ -1,0 +1,87 @@
+﻿@model EcommercePetStore.Models.Order
+
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+@if (TempData["CancelError"] != null)
+{
+    <div class="alert alert-danger">@TempData["CancelError"]</div>
+}
+
+@if (TempData["CancelSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["CancelSuccess"]</div>
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-success">🎉 Thank you for your order!</h2>
+        <p>Your order has been placed successfully.</p>
+
+        <h4>Order Summary</h4>
+        <p><strong>Order ID:</strong> @Model.Id</p>
+        <p><strong>Date:</strong> @Model.OrderDate.ToString("f")</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+        <p><strong>Name:</strong> @Model.CustomerName</p>
+        <p><strong>Address:</strong> @Model.Address</p>
+        <p><strong>Phone:</strong> @Model.Phone</p>
+
+        <h5 class="mt-4">Items</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td><img src="~/Products/@item.Product?.ImageUrl" width="80" /></td>
+                        <td>@item.Product?.ProductName</td>
+                        <td>@item.Quantity</td>
+                        <td>$@item.Price</td>
+                        <td>$@(item.Quantity * item.Price)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4 class="text-end">
+            Total: 
+            $@(Model.OrderItems.Sum(i => i.Quantity * i.Price))
+        </h4>
+
+        <!-- ✅ Cancel Order Section -->
+        @if (Model.Status != "Shipped" && Model.Status != "Delivered" && Model.Status != "Cancelled")
+        {
+            <div class="text-center mt-3">
+                <form  asp-controller="Order" asp-action="Cancel" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to cancel this order?');">
+                        Cancel Order
+                    </button>
+                </form>
+            </div>
+        }
+        else if (Model.Status == "Cancelled")
+        {
+            <div class="text-center mt-3">
+                <span class="badge bg-danger">Order Cancelled</span>
+            </div>
+        }
+
+        <div class="text-center mt-4">
+            <a href="@Url.Action("MyOrders", "Cart")" class="btn btn-primary">View Orders</a>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model EcommercePetStore.ViewModels.AdminDashboardViewModel
+
+       
+
+    <!-- Sidebar -->
+    <div class="sidebar d-lg-block d-md-none d-none">
+    <h4 class="text-white text-center mb-4">Admin Panel</h4>
+
+    <a asp-controller="Product" asp-action="Index" class="active">
+        <i class="fa-solid fa-box"></i> Products
+    </a>
+
+    <!-- Dropdown for Manage -->
+    <div class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-gear"></i>Manage
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="manageDropdown">
+            <li>
+                <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">
+                    <i class="fa-solid fa-user"></i> Users
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">
+                    <i class="fa-solid fa-id-badge"></i> Roles
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <a asp-controller="Order" asp-action="Index">
+        <i class="fa-solid fa-shopping-cart"></i> Orders
+    </a>
+</div>
+
+    <!-- Content -->
+    <div class="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm rounded">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="#">Admin Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+<h2>Orders</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Payment Method</th>
+            <th>Status</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Orders != null && Model.Orders.Any())
+        {
+            foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.User?.Email</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                    <td>@order.PaymentMethod</td>
+                    <td>@order.Status</td>
+                    <td>@order.OrderItems.Sum(i => i.Price * i.Quantity).ToString("C")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="6" class="text-center">No orders found</td></tr>
+        }
+    </tbody>
+</table>
+
+
+  <h2>Products</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Available Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Products != null && Model.Products.Any())
+        {
+            foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td><img src="/Products/@product.ImageUrl" width="100" />@product.ProductName</td>
+                    <td>@product.Price.ToString("C")</td>
+                    <td>@product.Quantity</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="6" class="text-center">No products found</td></tr>
+        }
+    </tbody>
+</table>
+
+    </div>
+
+   

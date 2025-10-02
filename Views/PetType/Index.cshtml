@@ -1,0 +1,36 @@
+﻿@model List<PetType>
+@{
+}
+
+<h2 class="text-center mb-5">List of Product Types</h2>
+<div class="row mb-5">
+     <div class="col">
+        <a class="btn btn-primary" asp-controller="PetType" asp-action="Create">Add New Product Type</a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product Type Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var type in Model)
+        {
+            <tr>
+                <td>@type.Id</td>
+                <td>@type.Name</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="PetType" asp-action="Edit" 
+                    asp-route-id="@type.Id">Edit</a>
+
+                    <a class="btn btn-danger btn-sm" asp-controller="PetType" asp-action="Delete" 
+                    asp-route-id="@type.Id" onclick="return confirm('Are You Sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
