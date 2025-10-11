@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Ecommerce_Pet_Store.Models.Product>
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<div class="container mt-4">
+    <h3>Search Results</h3>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted">No products or categories found.</p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="/Products/@product.ImageUrl" class="card-img-top" alt="@product.ProductName" />
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text text-muted">
+                                Categories:
+                                @string.Join(", ", product.ProductCategories.Select(pc => pc.Category.CategoryName))
+                            </p>
+                            <p class="fw-bold">$@product.Price</p>
+                            <a asp-action="ProductDetails" asp-route-id="@product.Id" class="btn btn-outline-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

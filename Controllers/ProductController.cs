@@ -18,7 +18,27 @@ namespace Ecommerce_Pet_Store.Controllers
             this.context = context;
             this.environment = environment;
         }
-        [Authorize]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return View("SearchResults", new List<Product>());
+            }
+
+            // Search by product name or any category name linked to that product
+            var results = await context.Products
+                .Include(p => p.ProductCategories)
+                    .ThenInclude(pc => pc.Category)
+                .Where(p => p.ProductName.Contains(query) ||
+                            p.ProductCategories.Any(pc => pc.Category.CategoryName.Contains(query)))
+                .ToListAsync();
+
+            return View("SearchResults", results);
+        }
+    
+    [Authorize]
         public IActionResult Index()
         {
             var products = context.Products

@@ -85,9 +85,10 @@
                     </li>
                         
                 </ul>
-                <form class="d-flex me-3" role="search">
+                <form asp-controller="Product" asp-action="Search" method="get" class="d-flex me-3" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search pet products..." aria-label="Search" id="searchInput">
+                    <!-- 🔑 Add the name="query" attribute -->
+                        <input type="text" class="form-control" placeholder="Search pet products..." aria-label="Search" id="searchInput" name="query">
                         <button class="btn btn-outline-primary" type="submit" id="searchBtn">
                             <i class="fas fa-search"></i>
                         </button>
